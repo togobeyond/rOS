@@ -27,7 +27,7 @@ file_mirrorlist=/etc/pacman.d/mirrorlist
 packages="\
 alsaequal alsa-utils audiocd-meta cava cronie dosfstools dtc evtest
 gcc gifsicle hdparm hfsprogs i2c-tools imagemagick inetutils iwd jq kid3-common
-libgpiod linux-rpi mmc-utils mpc mpd mpd_oled nfs-utils nginx-mainline nss-mdns
+libgpiod linux-rpi mmc-utils mpc mpd mpd_oled nfs-utils nginx-mainline nqptp nss-mdns
 parted php-fpm pkgconf python-rpi-gpio python-rplcd python-smbus2 python-websocket-client python-websockets
 raspberrypi-utils sudo udevil websocat wget xorg-xset"
 
@@ -89,11 +89,14 @@ pacman -Rdd --noconfirm vapoursynth # no use for video
 banner r A u d i o
 for repo in rAudio rAudio-assets rOS; do
 	case $repo in
-		rAudio )        d_f=tags/$RELEASE;;
-		rAudio-assets ) d_f=heads/main;;
-		rOS )           d_f=heads/$BRANCH;;
+		rAudio )        d_f=tags/$RELEASE
+						user=togobeyond;;
+		rAudio-assets ) d_f=heads/main
+						user=rern;;
+		rOS )           d_f=heads/$BRANCH
+						user=togobeyond;;
 	esac
-	curl -sL https://github.com/rern/$repo/archive/refs/$d_f.tar.gz \
+	curl -sL https://github.com/$user/$repo/archive/refs/$d_f.tar.gz \
 		| bsdtar xvf - --strip-components=1 -C / 2>&1 \
 		| grep '/.*/'
 done

@@ -5,7 +5,7 @@ trap trapExit EXIT SIGINT
 START=$( date +%s )
 BRANCH=${1:-main}
 
-[[ ! $logo ]] && . <( curl -sL https://github.com/rern/rOS/raw/$BRANCH/common.sh )
+[[ ! $logo ]] && . <( curl -sL https://github.com/togobeyond/rOS/raw/$BRANCH/common.sh )
 
 export PATH+=:/sbin # debian
 package.required bsdtar dialog gawk jq nmap pigz pv sfdisk ssh

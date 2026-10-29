@@ -247,8 +247,8 @@ udisk2Toggle() {
 	fi
 }
 https_rern=https://github.com/rern
-https_raudio=$https_rern/rAudio
-https_ros=$https_rern/rOS/raw/$BRANCH
+https_raudio=https://github.com/togobeyond/rAudio
+https_ros=https://github.com/togobeyond/rOS/raw/$BRANCH
 https_io=$https_rern/rern.github.io/raw/$BRANCH
 opt_ssh='-qtt -o ConnectTimeout=3
 			  -o StrictHostKeyChecking=no
