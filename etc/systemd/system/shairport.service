@@ -3,6 +3,8 @@ Description=Shairport Sync metadata
 After=network.target shairport-sync.service
 
 [Service]
+Restart=always
+RestartSec=5
 ExecStart=/srv/http/bash/status-shairport.sh
 User=root
 Group=root
