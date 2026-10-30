@@ -2,7 +2,12 @@
 
 trap 'START=; rm -f /var/lib/pacman/db.lck; exit 1' EXIT SIGINT
 
+cd /root # must not depend on the caller's cwd (systemd starts units in /)
 . DATA
+if [[ ! $PARTID_R || ! $START ]]; then
+	echo "ERROR: /root/DATA is missing or incomplete (PARTID_R='$PARTID_R' START='$START') - abort"
+	exit 1
+fi
 cmdline_txt="\
 root=$PARTID_R rw rootwait plymouth.enable=0 dwc_otg.lpm_enable=0 fsck.repair=yes isolcpus=3 console=tty3 \
 quiet loglevel=0 logo.nologo vt.global_cursor_default=0
@@ -246,6 +251,7 @@ done < <( cut -d: -f1 /etc/passwd )
 usermod -a -G root http # add user http to group root to allow /dev/gpiomem access
 chown -R http:http /etc/fstab /etc/netctl /etc/systemd/network
 # cmdline.txt config.txt
+[[ $PARTID_R ]] || { echo "ERROR: PARTID_R empty - refusing to write a broken cmdline.txt"; exit 1; }
 for v in cmdline_txt config_txt; do
 	echo -n "${!v}" > /boot/${v/_/.}
 done

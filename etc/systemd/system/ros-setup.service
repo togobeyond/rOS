@@ -10,6 +10,7 @@ ConditionPathExists=/root/DATA
 
 [Service]
 Type=oneshot
+WorkingDirectory=/root
 Environment=TERM=linux
 ExecStartPre=/bin/bash -c 'for i in {1..60}; do curl -sfI --max-time 3 http://mirror.archlinuxarm.org/ > /dev/null && exit 0; sleep 5; done; exit 1'
 ExecStart=/bin/bash /root/create-ros.sh
