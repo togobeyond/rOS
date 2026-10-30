@@ -6,3 +6,6 @@ After=network.target shairport-sync.service
 ExecStart=/srv/http/bash/status-shairport.sh
 User=root
 Group=root
+
+[Install]
+WantedBy=multi-user.target

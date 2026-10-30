@@ -240,6 +240,7 @@ sed -i 's/#NTP=.*/NTP=pool.ntp.org/' /etc/systemd/timesyncd.conf
 systemctl daemon-reload
 systemctl disable systemd-homed $disable
 systemctl enable avahi-daemon cronie devmon@http nginx php-fpm startup websocket $enable
+[[ -e $dir_systemd/shairport.service ]] && systemctl enable shairport # AirPlay D-Bus monitor from boot
 hostnamectl set-hostname rAudio
 timedatectl set-timezone UTC
 # users
