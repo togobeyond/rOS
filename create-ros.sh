@@ -257,4 +257,7 @@ Created successfully
 \Z4$( date -d@$(( $( date +%s ) - $START )) -u +%M:%S )\Zn
 \Z1   Reboot ...\Zn"
 
+# first boot setup must not run again after reboot
+systemctl disable ros-setup.service &> /dev/null
+
 reboot
